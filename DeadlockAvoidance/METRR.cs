@@ -29,13 +29,16 @@ namespace DeadlockAvoidance
             for (int i = 0; i < P; i++)
             {
                 var pqElement = new MEETRTempModel() { Priority = i, Process = i };
-                pq.Enqueue(pqElement.Priority,pqElement);
+                pq.Enqueue(pqElement.Priority, pqElement);
             }
+
+
+
 
             int[] avail = { 3, 3, 2 };
 
-            int[,] maxm = {{4, 4, 1},
 
+            int[,] maxm = {{4, 4, 1},
                     {9, 0, 2},
                     {2, 2, 2},
                     {3, 2, 2},
@@ -45,7 +48,7 @@ namespace DeadlockAvoidance
                     {3, 0, 2},
                     {2, 1, 1},
                     {0, 0, 2}};
-            
+
 
 
 
@@ -59,7 +62,7 @@ namespace DeadlockAvoidance
             for (int i = 0; i < R; i++)
                 work[i] = avail[i];
 
-            bool found = false;
+
             int count = 0;
 
             while (count < pq.Count)
@@ -72,9 +75,9 @@ namespace DeadlockAvoidance
                     {
                         if (need[p, j] > work[j])
                         {
-                           
+
                             count++;
-                            x.Add(j);
+                            x.Add(p);
                             break;
                         }
                     }
@@ -86,29 +89,24 @@ namespace DeadlockAvoidance
                             work[k] += allot[p, k];
                         }
                         safeSeq[count++] = p;
-                        
-                        found = true;
 
-                      //  Console.WriteLine("Process " + p + "executed");
+
+
+                        Console.Write( p + " ");
                     }
                 }
 
 
-                if (found == false)
-                {
-                    //Console.Write("System is not in safe state");
-                    return false;
-                }
+
             }
-            //Console.WriteLine("System is in safe state.\nSafe"
-            //+ " sequence is: ");
+
 
             for (int i = 0; i < x.Count; i++)
             {
-                //Console.WriteLine(i);
+                Console.Write(x[i] + " ");
             }
-          
-           
+
+
             return true;
         }
 
@@ -116,7 +114,7 @@ namespace DeadlockAvoidance
     }
     public class MEETRTempModel
     {
-        public int Process { get; set; }     
+        public int Process { get; set; }
         public int Priority { get; set; }
     }
 
